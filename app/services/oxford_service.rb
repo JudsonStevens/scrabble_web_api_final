@@ -17,7 +17,7 @@ class OxfordService
     parsed_results = JSON.parse(send_request_for_word_search_with_examples(word).body)['results'].first['lexicalEntries'].first['sentences']  
     parsed_results.map do |result|
       if result['regions'].first == 'North American'
-        [result['regions'].first, result['text']]
+        DictionaryResults.new(result['regions'].first, result['text'])
       end
     end.compact
   end
