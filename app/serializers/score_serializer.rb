@@ -1,5 +1,4 @@
 class ScoreSerializer < ActiveModel::Serializer
-  alias :read_attribute_for_serialization :send
   attributes :user_id, :score
 
   def user_id
@@ -7,8 +6,6 @@ class ScoreSerializer < ActiveModel::Serializer
   end
 
   def score
-    object.plays.map do |play|
-      play.score
-    end.compact.inject(&:+)
+    object.plays.map { |play| play.score }.inject(&:+)
   end
 end
