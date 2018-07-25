@@ -1,5 +1,4 @@
 class OxfordService
-
   def initialize
     @conn = Faraday.new(:url => "https://od-api.oxforddictionaries.com")
   end
