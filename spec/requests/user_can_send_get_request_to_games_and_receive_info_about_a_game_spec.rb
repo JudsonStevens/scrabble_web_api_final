@@ -2,7 +2,12 @@ require 'rails_helper'
 
 describe 'User', type: :request do
   before(:each) do
-    create(:game)
+    game1 = create(:game)
+    user1 = User.first
+    user2 = User.last
+    create(:play, word: 'assess', game: game1, user: user1)
+    create(:play, word: 'assess', game: game1, user: user1)
+    create(:play, game: game1, user: user2)
   end
   
   it 'can send a get request to /api/v1/games/1 and get a response in JSON' do
