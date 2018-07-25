@@ -15,11 +15,11 @@ describe 'User', type: :request do
 
     data = JSON.parse(response.body)
 
-    expect(data['game_id']).to eq(Game.first.id)
+    expect(data['game_id']).to eq(Game.last.id)
     expect(data['scores'].class).to eq(Array)
-    expect(data['scores'].first['user_id']).to eq(Player.first.id)
-    expect(data['scores'].first['score']).to eq(15)
-    expect(data['scores'].last['user_id']).to eq(Player.last.id)
-    expect(data['scores'].last['score']).to eq(16)
+    expect(data['scores'].first['user_id']).to eq(User.first.id)
+    expect(data['scores'].first['score']).to eq(12)
+    expect(data['scores'].last['user_id']).to eq(User.last.id)
+    expect(data['scores'].last['score']).to eq(8)
   end
 end
