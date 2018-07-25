@@ -25,16 +25,19 @@ describe 'User', type: :request do
   end
 
   it 'can send a post request to /api/v1/games/1/plays and receive a 201 Created Response along with JSON' do
-    post "/api/v1/games/#{Game.last.id}/plays", params: { user_id: "#{User.first.id}", word: "at" }
+    post "/api/v1/games/#{Game.last.id}/plays", params: { plays: { user_id: "#{User.first.id}", word: "at" } }
+    
+    expect(response.status).to eq(201)
+
+    get "/api/v1/games/#{Game.last.id}"
 
     data = JSON.parse(response.body)
 
-    expect(response.status_code).to eq("201")
     expect(data['game_id']).to eq(Game.last.id)
     expect(data['scores'].class).to eq(Array)
     expect(data['scores'].first['user_id']).to eq(User.first.id)
-    expect(data['scores'].first['score']).to eq(14)
+    expect(data['scores'].first['score']).to eq(17)
     expect(data['scores'].last['user_id']).to eq(User.last.id)
-    expect(data['scores'].last['score']).to eq(8)
+    expect(data['scores'].last['score']).to eq(16)
   end
 end
