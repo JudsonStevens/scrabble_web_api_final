@@ -7,6 +7,6 @@ class Api::V1::PlaysController < ActionController::API
   private
 
   def play_params
-    params.require(:plays).permit(:word, :user_id)
+    params.permit(:word, :user_id)
   end
 end

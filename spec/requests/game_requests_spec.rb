@@ -27,10 +27,9 @@ describe 'User', type: :request do
   end
 
   it 'can send a post request to /api/v1/games/1/plays and receive a 201 response code along with JSON' do
-    post "/api/v1/games/#{Game.last.id}/plays", params: { plays: { user_id: "#{User.first.id}", word: "at" } }
+    post "/api/v1/games/#{Game.last.id}/plays", params: { user_id: "#{User.first.id}", word: "at" } 
 
     expect(response.status).to eq(201)
-    expect(response.body.class).to eq(String)
 
     get "/api/v1/games/#{Game.last.id}"
 
