@@ -15,5 +15,8 @@ class Play < ApplicationRecord
   private
 
     def score_word
+      self.score =  self.word.chars.map do |letter|
+                      letter_scores[letter.capitalize]
+                    end.inject(&:+)
     end
 end
