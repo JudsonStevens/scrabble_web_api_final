@@ -1,7 +1,7 @@
 class DictionaryResults
-  attr_reader :region, :text
-  def initialize(region, text)
-    @region = region
-    @text = text
+  def self.return_parsed_response(word)
+    OxfordService.new.parsed_response(word).map do |element|
+      SentenceService.new(element)
+    end
   end
 end

@@ -12,11 +12,11 @@ class OxfordService
     end
   end
 
-  def return_parsed_response(word)
+  def parsed_response(word)
     parsed_results = JSON.parse(send_request_for_word_search_with_examples(word).body)['results'].first['lexicalEntries'].first['sentences']  
     parsed_results.map do |result|
       if result['regions'].first == 'North American'
-        DictionaryResults.new(result['regions'].first, result['text'])
+        [result['regions'].first, result['text']]
       end
     end.compact
   end
